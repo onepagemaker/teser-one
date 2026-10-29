@@ -103,16 +103,16 @@ const bars = Array.from({ length: 48 }, (_, i) => 8 + Math.round(Math.abs(Math.s
 </Base>
 
 <style>
-  .hero { padding: 8.5rem 0 5rem; overflow: hidden; background: radial-gradient(ellipse at 85% 30%, rgba(46,232,107,.12), transparent 55%); }
+  .hero { padding: calc(76px + 1.8rem) 0 1.5rem; overflow: hidden; background: radial-gradient(ellipse at 85% 30%, rgba(46,232,107,.12), transparent 55%); }
   .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
   .hero h1 { font-size: clamp(2.8rem, 6.2vw, 5.6rem); margin-bottom: 1.6rem; }
   .hero p { max-width: 46ch; font-size: 1.15rem; color: var(--soft); }
   .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.4rem; }
   .hero-media { border-radius: 28px; overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--line); box-shadow: 0 0 90px rgba(46,232,107,.14); }
   .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 72% center; }
-  .hero-wave { margin-top: 4rem; opacity: .5; }
+  .hero-wave { margin-top: 1.2rem; opacity: .5; }
   @media (max-width: 860px) {
-    .hero { padding-top: 7rem; }
+    .hero { padding-top: calc(76px + 1.2rem); }
     .hero-grid { grid-template-columns: 1fr; }
     .hero-media { aspect-ratio: 4/3; }
   }
@@ -151,7 +151,7 @@ const bars = Array.from({ length: 48 }, (_, i) => 8 + Math.round(Math.abs(Math.s
   .sponsor.featured strong { color: var(--green); font-family: 'Fredoka'; font-size: 1.7rem; }
   @media (max-width: 700px) { .sponsor-row { grid-template-columns: 1fr; } }
 
-  .cta-banner { overflow: hidden; padding: clamp(6rem, 14vw, 10rem) 0; }
+  .cta-banner { overflow: hidden; padding: clamp(1.8rem, 4.2vw, 3rem) 0; }
   .cta-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; opacity: .75; }
   .cta-inner { position: relative; }
   .cta-banner h2 { font-size: clamp(2.2rem, 5.5vw, 4.4rem); max-width: 16ch; }

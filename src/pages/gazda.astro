@@ -44,7 +44,7 @@ import { site } from '../data/site.js';
 </Base>
 
 <style>
-  .host-hero { padding-top: 9rem; background: radial-gradient(ellipse at 70% 30%, rgba(46,232,107,.18), transparent 60%); }
+  .host-hero { padding-top: calc(76px + 1.8rem); background: radial-gradient(ellipse at 70% 30%, rgba(46,232,107,.18), transparent 60%); }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
   h1 { font-size: clamp(3.4rem, 10vw, 7.5rem); margin: 1.2rem 0 1.5rem; }
   .lead { font-size: 1.3rem; max-width: 34ch; margin-bottom: 2rem; color: var(--soft); }
@@ -61,6 +61,6 @@ import { site } from '../data/site.js';
   .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   .v { padding: 2rem; }
   .v h3 { font-size: 1.6rem; color: var(--green); margin-bottom: .7rem; }
-  .sign { margin-top: 4rem; text-align: center; font-family: 'Space Grotesk'; font-size: clamp(1.3rem, 3vw, 2rem); }
+  .sign { margin-top: 1.2rem; text-align: center; font-family: 'Space Grotesk'; font-size: clamp(1.3rem, 3vw, 2rem); }
   @media (max-width: 860px) { .grid, .gallery, .values { grid-template-columns: 1fr; } }
 </style>
