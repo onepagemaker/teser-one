@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import { pillars } from '../data/site.js';
+---
+<Base title="Despre">
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Omul din spatele <span class="neon-text">titlului.</span></h1>
+      <p>!teseЯ este despre persoana din spatele funcției, al afacerii, al succesului, al eșecului și al imaginii pe care o prezentăm lumii.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap two">
+      <div class="reveal">
+        <h2 class="big">Reset.<br/><span class="neon-text">Reverse.</span></h2>
+      </div>
+      <div class="reveal copy">
+        <p>Numele se citește de la coadă la cap. <strong>Reset</strong>, întors pe dos. Exact asta facem în fiecare episod: apăsăm pe reset la așteptări, la roluri, la titluri, și ne întoarcem la ce rămâne când toate astea dispar.</p>
+        <p>Primul episod pornește explicit de la această întrebare: dincolo de profesie și statut, <em>cine suntem fără tot acest construct social?</em></p>
+        <p>Nu căutăm răspunsuri corecte. Căutăm răspunsuri adevărate.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <img src="/images/a-studio-wide.jpg" alt="" loading="lazy" />
+    <div class="wrap band-inner">
+      <p class="quote reveal">„Uneori incomod. Uneori amuzant. Uneori profund personal. <span class="neon-text">Mereu real.</span>”</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><div><h2>Temele noastre</h2></div></div>
+      <div class="grid">
+        {pillars.map((p, i) => (
+          <div class="card tile reveal">
+            <span class="n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{p}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="format">
+    <div class="wrap two">
+      <div class="reveal">
+        <h2 class="mid">Două fotolii. Un microfon. Zero filtre.</h2>
+      </div>
+      <ul class="steps reveal">
+        <li><strong>Fără script.</strong><span class="muted">Invitații nu primesc întrebările dinainte.</span></li>
+        <li><strong>Fără etichete.</strong><span class="muted">Nu ne interesează CV-ul, ci drumul.</span></li>
+        <li><strong>Fără grabă.</strong><span class="muted">Conversații lungi, cât e nevoie ca să ajungem la esență.</span></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .two { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  .big { font-size: clamp(3.4rem, 10vw, 8rem); }
+  .mid { font-size: clamp(2rem, 4.5vw, 3.4rem); margin-top: 1rem; }
+  .copy p { font-size: 1.2rem; margin-bottom: 1.3rem; color: var(--soft); }
+  .copy strong, .copy em { color: var(--text); }
+  .band { overflow: hidden; padding: clamp(6rem, 14vw, 10rem) 0; border-block: 1px solid var(--line); }
+  .band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; }
+  .band-inner { position: relative; }
+  .quote { font-family: 'Space Grotesk'; font-size: clamp(1.8rem, 4.5vw, 3.4rem); line-height: 1.15; max-width: 20ch; font-weight: 500; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .tile { padding: 2rem 1.5rem; min-height: 170px; display: flex; flex-direction: column; justify-content: space-between; }
+  .tile .n { font-family: 'Space Grotesk'; color: var(--green); font-size: .85rem; letter-spacing: .2em; }
+  .tile h3 { font-size: 1.5rem; }
+  .format { background: var(--bg-2); border-top: 1px solid var(--line); }
+  .steps { list-style: none; display: grid; gap: 1.2rem; }
+  .steps li { display: grid; gap: .3rem; padding: 1.4rem 0; border-bottom: 1px solid var(--line); font-size: 1.15rem; }
+  .steps strong { font-family: 'Space Grotesk'; font-size: 1.4rem; color: var(--green); }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr 1fr; } }
+</style>

@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import { sponsors } from '../data/site.js';
+const featured = sponsors.find((s) => s.featured);
+const others = sponsors.filter((s) => !s.featured);
+---
+<Base title="Sponsori" description="Brandurile care susțin podcastul !teseЯ.">
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Branduri cu <span class="neon-text">substanță.</span></h1>
+      <p>Lucrăm doar cu branduri în care credem și pe care le-am recomanda și fără microfon. Le vei auzi menționate în episoade, natural, nu din script.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      {featured && (
+        <article class="feature card reveal">
+          <div class="feature-img"><img src="/images/studio-real.jpg" alt="Studioul !teseЯ" loading="lazy" /></div>
+          <div class="feature-body">
+            <h2 class="brand">{featured.name}</h2>
+            <span class="cat">{featured.category}</span>
+            <p>{featured.blurb}</p>
+            {featured.url && <a href={featured.url} target="_blank" rel="noopener" class="btn btn-sm">Descoperă {featured.name}</a>}
+          </div>
+        </article>
+      )}
+      <div class="others">
+        {others.map((s) => (
+          <a class="card slot reveal" href={s.url} target="_blank" rel="noopener">
+            <span class="cat">{s.category}</span>
+            <h3>{s.name}</h3>
+            <p class="muted">{s.blurb}</p>
+            <span class="handle">Instagram · {s.handle} ↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pitch">
+    <div class="wrap pitch-grid">
+      <div class="reveal">
+        <h2>Devino partener !teseЯ</h2>
+        <p class="muted">Un public care ascultă conversații lungi, cu atenție. Integrări autentice, spuse de gazdă cu vocea lui.</p>
+      </div>
+      <ul class="perks reveal">
+        <li><strong>Mențiune în episod</strong><span>Integrare naturală în conversație</span></li>
+        <li><strong>Prezență în studio</strong><span>Produsele tale, vizibile pe set</span></li>
+        <li><strong>Social & website</strong><span>Logo, link și conținut dedicat</span></li>
+      </ul>
+      <a href="/contact" class="btn">Cere media kit-ul</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .feature { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-color: rgba(46,232,107,.45); box-shadow: 0 0 80px rgba(46,232,107,.1); }
+  .feature-img img { width: 100%; height: 100%; object-fit: cover; min-height: 340px; }
+  .feature-body { padding: clamp(2rem, 4vw, 3.5rem); display: flex; flex-direction: column; justify-content: center; gap: 1rem; align-items: flex-start; }
+  .brand { font-family: 'Fredoka'; font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--green); text-shadow: var(--glow); }
+  .cat { font-family: 'Space Grotesk'; font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .feature-body p { font-size: 1.15rem; color: var(--soft); }
+  .others { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+  .slot { padding: 2rem; display: grid; gap: .6rem; }
+  .slot h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .handle { margin-top: .6rem; font-family: 'Space Grotesk'; font-weight: 500; color: var(--green); }
+  .slot h3 { font-size: 1.4rem; }
+  .pitch { background: var(--bg-2); border-top: 1px solid var(--line); }
+  .pitch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .pitch h2 { font-size: clamp(2rem, 4.5vw, 3.4rem); margin: 1rem 0; }
+  .pitch-grid > .btn { justify-self: start; }
+  .perks { list-style: none; display: grid; gap: 1rem; }
+  .perks li { display: grid; padding: 1.2rem 1.4rem; border: 1px solid var(--line); border-radius: 16px; }
+  .perks strong { font-family: 'Space Grotesk'; font-size: 1.2rem; color: var(--green); }
+  .perks span { color: var(--muted); }
+  @media (max-width: 860px) { .feature, .others, .pitch-grid { grid-template-columns: 1fr; } }
+</style>

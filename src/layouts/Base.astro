@@ -1,0 +1,169 @@
+---
+import { nav, site } from '../data/site.js';
+
+const { title, description = '!teseЯ: conversații oneste despre omul din spatele titlului. Găzduit de Dragoș Ioniță.' } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title ? `${title} · !teseЯ` : '!teseЯ · Substance over mask.'}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="/" class="logo" aria-label="!teseЯ acasă"><span class="bang">!</span>teseЯ</a>
+      <button class="burger" aria-label="Meniu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <nav class="links">
+        {nav.map((n) => (
+          <a href={n.href} class:list={[{ active: path === n.href }]}>{n.label}</a>
+        ))}
+        <a href={site.youtube} target="_blank" rel="noopener" class="btn btn-sm">Ascultă</a>
+      </nav>
+    </div>
+  </header>
+
+  <main><slot /></main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <a href="/" class="logo logo-lg"><span class="bang">!</span>teseЯ</a>
+          <p class="muted">Take off the mask. Reset the conversation.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h4>Podcast</h4>
+            {nav.slice(1, 4).map((n) => <a href={n.href}>{n.label}</a>)}
+          </div>
+          <div>
+            <h4>Colaborări</h4>
+            <a href="/sponsori">Sponsori</a>
+            <a href="/contact">Devino invitat</a>
+            <a href="/contact">Contact</a>
+          </div>
+          <div>
+            <h4>Urmărește</h4>
+            <a href={site.youtube} target="_blank" rel="noopener">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 !teseЯ Podcast</span>
+        <span class="neon-text">SUBSTANCE OVER MASK.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.querySelector('.burger');
+    burger?.addEventListener('click', () => {
+      const open = document.body.classList.toggle('menu-open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.isIntersecting && e.target.classList.add('in'));
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #1a1b1d;
+    --bg-2: #202124;
+    --card: #26282b;
+    --line: rgba(255, 255, 255, 0.09);
+    --green: #2ee86b;
+    --green-deep: #1b9c3e;
+    --text: #f1f2f2;
+    --soft: #c9cccd;
+    --muted: #9a9fa3;
+    --glow: 0 0 24px rgba(46, 232, 107, 0.45);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--green); color: #000; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: min(1200px, 100% - 32px); margin-inline: auto; }
+  h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
+  .muted { color: var(--muted); }
+  .green { color: var(--green); }
+  .neon-text { color: var(--green); text-shadow: var(--glow); }
+
+  .logo { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.9rem; color: var(--green); letter-spacing: 0.01em; text-shadow: 0 0 18px rgba(46,232,107,.35); }
+  .logo .bang { color: #fff; margin-right: 1px; }
+  .logo-lg { font-size: 2.6rem; }
+
+
+  .btn { display: inline-flex; align-items: center; gap: .6rem; padding: .95rem 1.7rem; border-radius: 999px; background: var(--green); color: #031008; font-family: 'Space Grotesk', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .85rem; box-shadow: var(--glow); transition: transform .25s, box-shadow .25s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(46,232,107,.7); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,.2); box-shadow: none; }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); box-shadow: none; }
+  .btn-sm { padding: .6rem 1.2rem; font-size: .75rem; }
+
+  /* Nav */
+  .nav { position: fixed; inset: 0 0 auto; z-index: 50; backdrop-filter: blur(14px); background: rgba(26,27,29,.7); border-bottom: 1px solid var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .links { display: flex; align-items: center; gap: 2rem; }
+  .links a:not(.btn) { font-family: 'Space Grotesk', sans-serif; font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+  .links a:not(.btn):hover, .links a.active { color: var(--green); }
+  .burger { display: none; background: none; border: 0; width: 36px; height: 36px; cursor: pointer; position: relative; }
+  .burger span { position: absolute; left: 6px; right: 6px; height: 2px; background: var(--text); transition: .3s; }
+  .burger span:first-child { top: 13px; } .burger span:last-child { top: 22px; }
+  @media (max-width: 900px) {
+    .burger { display: block; }
+    .links { position: fixed; inset: 76px 0 auto; flex-direction: column; align-items: flex-start; gap: 1.4rem; padding: 2rem 16px 2.5rem; background: var(--bg); border-bottom: 1px solid var(--line); transform: translateY(-120%); transition: transform .35s; z-index: -1; }
+    .menu-open .links { transform: none; }
+    .menu-open .burger span:first-child { top: 17px; transform: rotate(45deg); }
+    .menu-open .burger span:last-child { top: 17px; transform: rotate(-45deg); }
+  }
+
+  /* Sections */
+  section { padding: clamp(4.5rem, 10vw, 8rem) 0; position: relative; }
+  .section-head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .section-head h2 { font-size: clamp(2.2rem, 5vw, 3.8rem); margin-top: .8rem; }
+  .page-hero { padding-top: 10rem; padding-bottom: 4rem; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 80% 0%, rgba(46,232,107,.16), transparent 55%); }
+  .page-hero h1 { font-size: clamp(2.8rem, 8vw, 6rem); margin: 1rem 0 1.2rem; max-width: 14ch; }
+  .page-hero p { max-width: 60ch; font-size: 1.15rem; color: var(--muted); }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; transition: border-color .3s, transform .3s; }
+  .card:hover { border-color: rgba(46,232,107,.45); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Waveform divider */
+  .wave { display: flex; align-items: center; justify-content: center; gap: 4px; height: 40px; }
+  .wave i { width: 2px; background: var(--green); box-shadow: var(--glow); border-radius: 2px; animation: pulse 1.4s ease-in-out infinite; }
+  @keyframes pulse { 50% { transform: scaleY(.35); } }
+
+  /* Footer */
+  .footer { border-top: 1px solid var(--line); padding: 4rem 0 2rem; background: var(--bg-2); }
+  .footer-top { display: flex; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+  .footer-cols { display: flex; gap: clamp(2rem, 6vw, 5rem); flex-wrap: wrap; }
+  .footer-cols h4 { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+  .footer-cols a { display: block; color: var(--muted); margin-bottom: .5rem; font-size: .95rem; }
+  .footer-cols a:hover { color: var(--text); }
+  .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-family: 'Space Grotesk', sans-serif; }
+</style>

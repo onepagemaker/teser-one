@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site.js';
+---
+<Base title="Contact">
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Hai să <span class="neon-text">vorbim.</span></h1>
+      <p>Ai o poveste care merită spusă? Reprezinți un brand care vrea să fie alături de !teseЯ? Scrie-ne pe canalul nostru.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid">
+      <div class="card info">
+        <h3>Vrei să fii invitat?</h3>
+        <p class="muted">Spune-ne pe scurt povestea ta și de ce crezi că ar trebui ascultată.</p>
+        <a href={site.youtube} target="_blank" rel="noopener" class="btn btn-sm">YouTube ↗</a>
+      </div>
+      <div class="card info">
+        <h3>Parteneriate</h3>
+        <p class="muted">Pentru branduri care vor să fie parte din conversație.</p>
+        <a href="/sponsori" class="btn btn-sm btn-ghost">Vezi sponsorii</a>
+      </div>
+      <img src="/images/banner.jpg" alt="!teseЯ · Substance over mask." class="banner" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .info { padding: clamp(1.6rem, 4vw, 2.5rem); display: grid; gap: 1rem; justify-items: start; }
+  .info h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .banner { grid-column: 1 / -1; border-radius: 16px; border: 1px solid var(--line); }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+</style>

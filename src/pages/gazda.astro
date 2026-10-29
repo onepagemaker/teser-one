@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site.js';
+---
+<Base title="Gazda" description="Dragoș Ioniță, gazda podcastului !teseЯ.">
+  <section class="host-hero">
+    <div class="wrap grid">
+      <div class="text">
+        <h1>Dragoș<br/><span class="neon-text">Ioniță</span></h1>
+        <p class="lead">Omul din celălalt fotoliu. Ascultă mai mult decât vorbește și întreabă exact ce te-ai fi ferit să auzi.</p>
+        <a href="/contact" class="btn">Scrie-i lui Dragoș</a>
+      </div>
+      <div class="portrait">
+        <img src="/images/a-host-mask.jpg" alt="Dragoș Ioniță" />
+        <span class="tag">Host · !teseЯ</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="bio">
+    <div class="wrap narrow">
+      <p class="reveal">Dragoș a construit !teseЯ dintr-o convingere simplă: <strong>cele mai interesante povești nu sunt pe cartea de vizită.</strong> Sunt în deciziile grele, în eșecurile despre care nu vorbim și în momentele în care am fost nevoiți să o luăm de la zero.</p>
+      <p class="reveal">În fiecare episod, el aduce în fotoliu oameni pentru ce au trăit, nu pentru eticheta de lângă nume: antreprenori, artiști, profesioniști și oameni obișnuiți cu povești neobișnuite.</p>
+    </div>
+  </section>
+
+  <section class="photos">
+    <div class="wrap gallery">
+      <img src="/images/a-hero.jpg" alt="Dragoș Ioniță la microfon" loading="lazy" class="wide" />
+      <img src="/images/studio-real.jpg" alt="Dragoș Ioniță în studio" loading="lazy" />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="values">
+        <div class="card v reveal"><h3>Curiozitate</h3><p class="muted">Fiecare invitat e o lume. Întrebările vin din ce ascultă, nu dintr-o listă.</p></div>
+        <div class="card v reveal"><h3>Onestitate</h3><p class="muted">Inclusiv despre el. Gazda își dă primul masca jos.</p></div>
+        <div class="card v reveal"><h3>Umor</h3><p class="muted">Pentru că adevărul se spune mai ușor când râzi.</p></div>
+      </div>
+      <p class="sign">„Take off the mask. <span class="neon-text">Reset the conversation.</span>” <span class="muted">{site.host}</span></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .host-hero { padding-top: 9rem; background: radial-gradient(ellipse at 70% 30%, rgba(46,232,107,.18), transparent 60%); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  h1 { font-size: clamp(3.4rem, 10vw, 7.5rem); margin: 1.2rem 0 1.5rem; }
+  .lead { font-size: 1.3rem; max-width: 34ch; margin-bottom: 2rem; color: var(--soft); }
+  .portrait { position: relative; border-radius: 28px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 0 100px rgba(46,232,107,.18); }
+  .tag { position: absolute; left: 1.2rem; bottom: 1.2rem; background: rgba(0,0,0,.6); backdrop-filter: blur(6px); padding: .5rem 1rem; border-radius: 999px; font-family: 'Space Grotesk'; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--green); }
+  .narrow { max-width: 760px; }
+  .bio p { font-size: clamp(1.2rem, 2.4vw, 1.55rem); line-height: 1.55; margin-bottom: 1.6rem; color: var(--soft); }
+  .bio strong { color: var(--text); font-weight: 500; }
+  .bio .small { font-size: .95rem; font-style: italic; }
+  .photos { padding-top: 0; }
+  .gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid var(--line); aspect-ratio: 4/3; }
+  .gallery .wide { aspect-ratio: auto; }
+  .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .v { padding: 2rem; }
+  .v h3 { font-size: 1.6rem; color: var(--green); margin-bottom: .7rem; }
+  .sign { margin-top: 4rem; text-align: center; font-family: 'Space Grotesk'; font-size: clamp(1.3rem, 3vw, 2rem); }
+  @media (max-width: 860px) { .grid, .gallery, .values { grid-template-columns: 1fr; } }
+</style>

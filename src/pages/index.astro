@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+import { episodes, pillars, site, sponsors } from '../data/site.js';
+const latest = episodes[0];
+const bars = Array.from({ length: 48 }, (_, i) => 8 + Math.round(Math.abs(Math.sin(i * 1.7)) * 32));
+---
+<Base>
+  <section class="hero">
+    <div class="wrap hero-grid">
+    <div class="hero-content">
+      <h1>Cine ești când îți dai <span class="neon-text">masca</span> jos?</h1>
+      <p>Conversații oneste despre omul din spatele titlului, al afacerii, al succesului și al eșecului. Fără scripturi. Fără răspunsuri perfecte. Fără măști.</p>
+      <div class="hero-cta">
+        <a href={`https://www.youtube.com/watch?v=${latest.youtubeId}`} target="_blank" rel="noopener" class="btn">▶ Ultimul episod</a>
+        <a href="/despre" class="btn btn-ghost">Ce e !teseЯ</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="/images/a-hero.jpg" alt="Dragoș Ioniță în studioul !teseЯ" />
+    </div>
+    </div>
+    <div class="hero-wave wave" aria-hidden="true">
+      {bars.map((h, i) => <i style={`height:${h}px;animation-delay:${(i % 12) * -0.12}s`}></i>)}
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <div class="wrap manifesto-grid">
+      <div class="reveal">
+        <h2>No polished scripts.<br/>No perfect answers.<br/><span class="neon-text">No masks.</span></h2>
+      </div>
+      <div class="reveal">
+        <p class="lead">!teseЯ aduce oameni în fotoliu nu pentru etichetele de lângă numele lor, ci pentru poveștile, experiențele și perspectivele din spatele lor.</p>
+        <p class="muted">Uneori incomod. Uneori amuzant. Uneori profund personal. Mereu real.</p>
+        <ul class="pillars">
+          {pillars.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="latest">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2>În fotoliu acum</h2></div>
+        <a href="/episoade" class="btn btn-ghost btn-sm">Toate episoadele →</a>
+      </div>
+      <a class="latest-card card reveal" href={`https://www.youtube.com/watch?v=${latest.youtubeId}`} target="_blank" rel="noopener">
+        <div class="thumb">
+          <img src={`https://img.youtube.com/vi/${latest.youtubeId}/maxresdefault.jpg`} alt={latest.title} loading="lazy" />
+          <span class="play">▶</span>
+        </div>
+        <div class="latest-body">
+          <span class="ep-num">EP {String(latest.number).padStart(2, '0')}</span>
+          <h3>{latest.title}</h3>
+          <p class="muted">{latest.summary}</p>
+          <span class="green link">Urmărește pe YouTube →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="host-teaser">
+    <div class="wrap host-grid">
+      <div class="host-img reveal">
+        <img src="/images/a-host-mask.jpg" alt="Dragoș Ioniță ținând o mască albă" loading="lazy" />
+      </div>
+      <div class="reveal">
+        <h2>{site.host}</h2>
+        <p class="lead">Nu un moderator care bifează întrebări, ci un om care ascultă. Dragoș pune pe masă curiozitatea, umorul și curajul de a întreba ce contează.</p>
+        <a href="/gazda" class="btn">Cunoaște gazda</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sponsor-strip">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2>Branduri care susțin conversația</h2></div>
+        <a href="/sponsori" class="btn btn-ghost btn-sm">Devino partener →</a>
+      </div>
+      <div class="sponsor-row">
+        {sponsors.map((s) => (
+          <a href="/sponsori" class:list={['sponsor card', { featured: s.featured }]}>
+            <strong>{s.name}</strong>
+            <span>{s.category}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <img src="/images/a-studio-wide.jpg" alt="" class="cta-bg" loading="lazy" />
+    <div class="wrap cta-inner reveal">
+      <h2>Take off the mask.<br/><span class="neon-text">Reset the conversation.</span></h2>
+      <div class="hero-cta">
+        <a href={site.youtube} target="_blank" rel="noopener" class="btn">Abonează-te pe YouTube</a>
+        <a href="/contact" class="btn btn-ghost">Vrei să fii invitat?</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding: 8.5rem 0 5rem; overflow: hidden; background: radial-gradient(ellipse at 85% 30%, rgba(46,232,107,.12), transparent 55%); }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+  .hero h1 { font-size: clamp(2.8rem, 6.2vw, 5.6rem); margin-bottom: 1.6rem; }
+  .hero p { max-width: 46ch; font-size: 1.15rem; color: var(--soft); }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.4rem; }
+  .hero-media { border-radius: 28px; overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--line); box-shadow: 0 0 90px rgba(46,232,107,.14); }
+  .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 72% center; }
+  .hero-wave { margin-top: 4rem; opacity: .5; }
+  @media (max-width: 860px) {
+    .hero { padding-top: 7rem; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-media { aspect-ratio: 4/3; }
+  }
+
+  .manifesto-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  .manifesto h2 { font-size: clamp(2.2rem, 5vw, 3.8rem); margin-top: 1rem; }
+  .lead { font-size: 1.3rem; line-height: 1.55; margin-bottom: 1.2rem; font-weight: 400; }
+  .pillars { list-style: none; display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
+  .pillars li { border: 1px solid var(--line); padding: .45rem 1rem; border-radius: 999px; font-size: .85rem; color: var(--muted); font-family: 'Space Grotesk', sans-serif; }
+  @media (max-width: 860px) { .manifesto-grid { grid-template-columns: 1fr; } }
+
+  .latest { background: var(--bg-2); border-block: 1px solid var(--line); }
+  .latest-card { display: grid; grid-template-columns: 1.4fr 1fr; overflow: hidden; }
+  .thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+  .latest-card:hover .thumb img { transform: scale(1.04); }
+  .play { position: absolute; inset: 0; margin: auto; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: var(--green); color: #000; font-size: 1.4rem; box-shadow: var(--glow); }
+  .latest-body { padding: clamp(1.5rem, 4vw, 3rem); display: flex; flex-direction: column; justify-content: center; gap: 1rem; }
+  .latest-body h3 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+  .ep-num { font-family: 'Space Grotesk'; color: var(--green); letter-spacing: .2em; font-size: .8rem; }
+  .link { font-family: 'Space Grotesk'; font-weight: 500; }
+  @media (max-width: 860px) { .latest-card { grid-template-columns: 1fr; } }
+
+  .host-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .host-img { border-radius: 24px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 0 80px rgba(46,232,107,.12); }
+  .host-teaser h2 { font-size: clamp(2.4rem, 6vw, 4.4rem); margin: 1rem 0 1.4rem; }
+  .host-teaser .btn { margin-top: 1.2rem; }
+  @media (max-width: 860px) { .host-grid { grid-template-columns: 1fr; } }
+
+  .sponsor-strip { border-top: 1px solid var(--line); }
+  .sponsor-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .sponsor { padding: 2.2rem 1.6rem; display: flex; flex-direction: column; gap: .4rem; text-align: center; align-items: center; }
+  .sponsor strong { font-family: 'Space Grotesk'; font-size: 1.4rem; }
+  .sponsor span { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .sponsor.featured { border-color: rgba(46,232,107,.5); background: linear-gradient(160deg, rgba(46,232,107,.12), var(--card)); }
+  .sponsor.featured strong { color: var(--green); font-family: 'Fredoka'; font-size: 1.7rem; }
+  @media (max-width: 700px) { .sponsor-row { grid-template-columns: 1fr; } }
+
+  .cta-banner { overflow: hidden; padding: clamp(6rem, 14vw, 10rem) 0; }
+  .cta-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; opacity: .75; }
+  .cta-inner { position: relative; }
+  .cta-banner h2 { font-size: clamp(2.2rem, 5.5vw, 4.4rem); max-width: 16ch; }
+</style>
